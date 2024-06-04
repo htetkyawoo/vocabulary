@@ -1,0 +1,30 @@
+name: vocabulary
+version: "snapshot-0.0.1"
+
+services:
+  db:
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB : vocabulary
+      POSTGRES_USER : root
+    ports:
+      - 5432:5432
+  ms:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025
+  api:
+    build:
+      args:
+        DATASOURCE_URL: db:5432/vocabulary
+        DATASOURCE_PASSWORD: admin
+        DATASOURCE_USERNAME: root
+        MAIL_HOST: ms
+        MAIL_PORT: 1025
+      context: .
+
+    ports:
+      - 8080:8080

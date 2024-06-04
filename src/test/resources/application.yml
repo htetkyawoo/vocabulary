@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: vocabulary
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+
+  datasource:
+    url: jdbc:h2:mem:test_db
+    username: sa
+    password: password
+
+  sql:
+    init.mode: always
+
+  mail:
+    host: 127.0.0.1
+    port: 25
+
+default:
+  pageSize: 20
+
+security:
+  allowedMethods: "**"
+  allowedHeaders: "*"
+  allowedOrigins: http://localhost:3000
+
+
+springdoc:
+  api-docs:
+    version: openapi_3_1
+  swagger-ui:
+    path: /v3/api-docs
+    disable-swagger-default-url: true
+  show-actuator: true
+  cache:
+    disabled: true
+
+
+
+
+reset:
+  code:
+    duration: 60
