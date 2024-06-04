@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: vocabulary
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/vocabulary
+    username: postgres
+    password: admin
+
+  sql:
+    init:
+      mode: always
+
+  mail:
+    host: 0.0.0.0
+    port: 1025
+
+default:
+
+  pageSize: 20
+security:
+  allowedMethods: "**"
+  allowedHeaders: "*"
+
+  allowedOrigins: http://localhost:3000
+
+reset:
+  code:
+    duration: 60
