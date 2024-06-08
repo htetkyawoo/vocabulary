@@ -1,4 +1,4 @@
-# Vocabulary
+# Vocabulary-API
 
 ## Content
 
@@ -45,16 +45,16 @@
 #### With Docker
 
 - ``` shell
-    docker build . `
-    --build-arg DATASOURCE_URL={ipv4 address of host computer}:5432/{database schema} `
-    --build-arg DATASOURCE_PASSWORD={database password} `
-    --build-arg DATASOURCE_USERNAME={database username} `
-    --build-arg MAIL_HOST={ipv4 address of host computer} `
-    --build-arg MAIL_PORT={port of mailhog server} `
-    -t vocabulary:snapshot-0.0.1
+    docker build . -t vocabulary:snapshot-0.0.1
   
 - ```shell
-    docker run --name vocabulary -d -p 8080:8080 vocabulary:snapshot-0.0.1
+   docker run --name vocabulary -d -p 8080:8080`
+   -e DATASOURCE_URL={ipv4 address of host computer}:5432/{database schema} `
+   -e DATASOURCE_PASSWORD={database password} `
+   -e DATASOURCE_USERNAME={database username} `
+   -e MAIL_HOST={ipv4 address of host computer} `
+   -e MAIL_PORT={port of mailhog server} `
+   vocabulary:snapshot-0.0.1
 - go to [http://localhost:8080/api/vocabularies](http://localhost:8080/api/vocabularies)
 
 #### With Docker-Compose
