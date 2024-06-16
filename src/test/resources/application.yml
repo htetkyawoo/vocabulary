@@ -35,16 +35,17 @@ security:
 springdoc:
   api-docs:
     version: openapi_3_1
-  swagger-ui:
-    path: /v3/api-docs
-    disable-swagger-default-url: true
   show-actuator: true
   cache:
     disabled: true
 
-
-
-
 reset:
   code:
     duration: 60
+
+admin:
+  account:
+    email: admin@gmail.com
+    username: admin
+    password: admin
+    gender: MALE

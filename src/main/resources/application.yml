@@ -12,7 +12,7 @@ spring:
 
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/vocabulary
-    username: postgres
+    username: root
     password: admin
 
   sql:
@@ -26,9 +26,6 @@ spring:
 springdoc:
   api-docs:
     version: openapi_3_1
-  swagger-ui:
-    path: /v3/api-docs
-    disable-swagger-default-url: true
   show-actuator: true
   cache:
     disabled: true
@@ -45,3 +42,10 @@ security:
 reset:
   code:
     duration: 60
+
+admin:
+  account:
+    email: admin@gmail.com
+    username: root
+    password: admin
+    gender: MALE

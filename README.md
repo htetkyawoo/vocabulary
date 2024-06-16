@@ -46,14 +46,28 @@
 
 - ``` shell
     docker build . -t vocabulary:snapshot-0.0.1
-  
-- ```shell
+
+- Run with default value
+   ```shell
+   docker run --name vocabulary -d -p 8080:8080
+  ```
+
+   ```shell
    docker run --name vocabulary -d -p 8080:8080`
    -e DATASOURCE_URL={ipv4 address of host computer}:5432/{database schema} `
    -e DATASOURCE_PASSWORD={database password} `
    -e DATASOURCE_USERNAME={database username} `
    -e MAIL_HOST={ipv4 address of host computer} `
    -e MAIL_PORT={port of mailhog server} `
+   -e DEFAULT_PAGESIZE={page size} `
+   -e ALLOWED_METHODS={allowed crossorigin methods} `
+   -e ALLOWED_HEADERS={allowed crossorigin headers} `
+   -e ALLOWED_ORIGINS={allowed crossorigin url} `
+   -e RESET_CODE_DURATIONI={email reset code duration} `
+   -e ADMIN_EMAIL={admin email}
+   -e ADMIN_USERNAME={admin username}
+   -e ADMIN_PASSWORD={admin password}
+   -e ADMIN_GENDER={admin gender MALE or FEMALE}
    vocabulary:snapshot-0.0.1
 - go to [http://localhost:8080/api/vocabularies](http://localhost:8080/api/vocabularies)
 

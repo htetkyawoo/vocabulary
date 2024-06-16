@@ -1,18 +1,20 @@
 FROM eclipse-temurin:17-alpine
 
-ARG PROFILE
-ARG DATASOURCE_URL
-ARG DATASOURCE_PASSWORD
-ARG DATASOURCE_USERNAME
-ARG MAIL_HOST
-ARG MAIL_PORT
-
-ENV proifle=$PROFILE
-ENV datasource_password=$DATASOURCE_PASSWORD
-ENV datasource_url=jdbc:postgresql://$DATASOURCE_URL
-ENV datasource_username=$DATASOURCE_USERNAME
-ENV mail_host=$MAIL_HOST
-ENV mail_port=$MAIL_PORT
+ENV PROFILE=default
+ENV ADMIN_EMAIL=admin@gmail.com
+ENV ADMIN_USERNAME=admin
+ENV ADMIN_PASSWORD=root
+ENV ADMIN_GENDER=MALE
+ENV DATASOURCE_PASSWORD=admin
+ENV DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/vocabulary
+ENV DATASOURCE_USERNAME=root
+ENV MAIL_HOST=host.docker.internal
+ENV MAIL_PORT=8025
+ENV DEFAULT_PAGESIZE=20
+ENV ALLOWED_METHODS="**"
+ENV ALLOWED_HEADERS="*"
+ENV ALLOWED_ORIGINS=http://localhost:3000
+ENV RESET_CODE_DURATION=60
 COPY ./target/*.jar /app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-Dspring.profiles.active=${proifle}","-Dspring.datasource.url=${datasource_url}","-Dspring.datasource.username=${datasource_username}","-Dspring.datasource.password=${datasource_password}","-Dspring.mail.host=${mail_host}","-Dspring.mail.port=${mail_port}","-jar","app.jar"]
+ENTRYPOINT ["java","-Dadmin.account.gender=${ADMIN_GENDER}","-Dadmin.account.email=${ADMIN_EMAIL}", "-Dadmin.account.username=${ADMIN_USERNAME}", "-Dadmin.account.password=${ADMIN_PASSWORD}", "-Dreset.code.duration=${RESET_CODE_DURATION}","-Ddefault.pageSize=${DEFAULT_PAGESIZE}", "-Dsecurity.allowedMethods=${ALLOWED_METHODS}", "-Dsecurity.allowedHeaders=${ALLOWED_HEADERS}", "-Dsecurity.allowedOrigins=${ALLOWED_ORIGINS}","-Dspring.profiles.active=${PROFILE}","-Dspring.datasource.url=${DATASOURCE_URL}","-Dspring.datasource.username=${DATASOURCE_PASSWORD}","-Dspring.datasource.password=${DATASOURCE_PASSWORD}","-Dspring.mail.host=${MAIL_HOST}","-Dspring.mail.port=${MAIL_PORT}","-jar","app.jar"]

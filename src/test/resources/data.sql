@@ -79,5 +79,5 @@ values (3, 1),
        (31, 2);
 
 insert into account(email, name, password, role, gender)
-values ('admin@gmail.com', 'admin', '$2a$10$eWlVYavONWATmEa9PzZ27OM4Gu862waYPx6dg6LvB6ffgtBudcXpm', 0, 1),
+values
        ('member@gmail.com', 'member', '$2a$10$taGq4K1MBx3cEFr2A6xdK.aU8jTwtaojyVirIFiKqwc.s02aNarcG', 1, 0);

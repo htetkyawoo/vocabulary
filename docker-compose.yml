@@ -17,14 +17,15 @@ services:
       - 1025:1025
       - 8025:8025
   api:
-    build:
-      args:
-        DATASOURCE_URL: db:5432/vocabulary
-        DATASOURCE_PASSWORD: admin
-        DATASOURCE_USERNAME: root
-        MAIL_HOST: ms
-        MAIL_PORT: 1025
-      context: .
-
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_started
+      ms:
+        condition: service_started
+    environment:
+      DATASOURCE_URL: jdbc:postgresql://db:5432/vocabulary
+      MAIL_HOST: ms
+    build: .
     ports:
       - 8080:8080
