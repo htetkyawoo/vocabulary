@@ -51,7 +51,7 @@
    ```shell
    docker run --name vocabulary -d -p 8080:8080
   ```
-
+   Custom configuration
    ```shell
    docker run --name vocabulary -d -p 8080:8080`
    -e DATASOURCE_URL={ipv4 address of host computer}:5432/{database schema} `
