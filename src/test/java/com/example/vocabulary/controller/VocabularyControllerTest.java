@@ -3,7 +3,6 @@ package com.example.vocabulary.controller;
 import com.example.vocabulary.TestHelper;
 import com.example.vocabulary.http.req.VocabularyReq;
 import com.example.vocabulary.security.JwtProvider;
-import com.example.vocabulary.service.VocabularyService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -13,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class VocabularyControllerTest {
 
     @Autowired
@@ -39,8 +40,6 @@ class VocabularyControllerTest {
     @Autowired
     private JwtProvider jwtProvider;
 
-    @Autowired
-    private VocabularyService service;
     private String token;
     private final String endpoint = "/api/vocabularies";
 

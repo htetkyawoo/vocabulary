@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -20,7 +21,6 @@ import java.util.List;
 import static com.example.vocabulary.TestHelper.headers;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Import(DataSourceAutoConfiguration.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class SecurityControllerTest {
 
     private final String endPoint = "/api/login";
@@ -89,9 +90,7 @@ class SecurityControllerTest {
     @Test
     void unauthorized_exception() {
         var a = new AnonymousAuthenticationToken("admin", "admin", List.of(new SimpleGrantedAuthority("ADMIN")));
-        var exception = assertThrows(AccessDeniedException.class, () -> {
-            jwtProvider.generate(a);
-        });
+        var exception = assertThrows(AccessDeniedException.class, () -> jwtProvider.generate(a));
         assertEquals("Authentication Error", exception.getMessage());
     }
 

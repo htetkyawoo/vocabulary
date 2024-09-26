@@ -17,6 +17,7 @@
 
 ## Pre-requirement
 
+- [maven](https://maven.apache.org/install.html) for packing source into jar file.
 - [MailHog](https://github.com/mailhog/MailHog) for mail server.
 - [Postgresql](https://www.postgresql.org/) for database.
 - [Docker](https://www.docker.com/) for running as container. ***(optional)***

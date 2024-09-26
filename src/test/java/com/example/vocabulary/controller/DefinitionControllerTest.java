@@ -1,31 +1,23 @@
 package com.example.vocabulary.controller;
 
 import com.example.vocabulary.TestHelper;
-import com.example.vocabulary.entity.*;
 import com.example.vocabulary.http.req.DefinitionReq;
 import com.example.vocabulary.security.JwtProvider;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 import static com.example.vocabulary.TestHelper.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -33,6 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 class DefinitionControllerTest {
 
     @Autowired
@@ -62,7 +55,7 @@ class DefinitionControllerTest {
     @ParameterizedTest
     @CsvSource({"1,3,1 2,2", "2,31,,1", "10,3,1,0"})
     void test_get_method(long vocabularyId,int typeId, String langs,int count) throws Exception {
-        String endPoint = "";
+        String endPoint;
         if(Objects.nonNull(langs)){
             langs = langs.replaceAll(" ", ",");
             endPoint = String.format(endpoint + "?langs=%s",vocabularyId,typeId,langs);

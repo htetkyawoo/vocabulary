@@ -1,5 +1,4 @@
 name: vocabulary
-version: "snapshot-0.0.1"
 
 services:
   db:

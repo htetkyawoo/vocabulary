@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 
 @Service
 public class LocalFileStorageService implements FileStorageService{
@@ -21,7 +22,14 @@ public class LocalFileStorageService implements FileStorageService{
             var storageFolder = ResourceUtils.getFile("classpath:%s".formatted(storagePath));
             var file = Path.of(storageFolder.getAbsolutePath(), id + "." + extension);
             Files.copy(photo.getInputStream(), file, StandardCopyOption.REPLACE_EXISTING);
-            var result = file.toString().split("\\\\");
+            var fileName = file.toString();
+            String[] result = null;
+            if(fileName.contains("\\")){
+                result = fileName.split("\\\\");
+            }else{
+                result = fileName.split("/");
+            }
+            System.out.println(Arrays.toString(result));
             return "/" + result[result.length - 2] + "/" + result[result.length - 1];
 
         } catch (IOException e) {
